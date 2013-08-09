@@ -87,6 +87,7 @@ enum hwdec_type {
     HWDEC_VDPAU = 1,
     HWDEC_VDA = 2,
     HWDEC_CRYSTALHD = 3,
+    HWDEC_VAAPI = 4,
 };
 
 struct hwdec {
@@ -97,6 +98,7 @@ struct hwdec {
 
 const struct vd_lavc_hwdec_functions mp_vd_lavc_vdpau;
 const struct vd_lavc_hwdec_functions mp_vd_lavc_vdpau_old;
+const struct vd_lavc_hwdec_functions mp_vd_lavc_vaapi;
 
 static const struct hwdec hwdec_list[] = {
 #if CONFIG_VDPAU
@@ -127,6 +129,14 @@ static const struct hwdec hwdec_list[] = {
     {HWDEC_CRYSTALHD,   "vc1",          "vc1_crystalhd"},
     {HWDEC_CRYSTALHD,   "h264",         "h264_crystalhd"},
     {HWDEC_CRYSTALHD,   "mpeg4",        "mpeg4_crystalhd"},
+
+#if CONFIG_VAAPI
+    {HWDEC_VAAPI,       "h264",         NULL,           &mp_vd_lavc_vaapi},
+    {HWDEC_VAAPI,       "wmv3",         NULL,           &mp_vd_lavc_vaapi},
+    {HWDEC_VAAPI,       "vc1" ,         NULL,           &mp_vd_lavc_vaapi},
+    {HWDEC_VAAPI,       "mpeg2video",   NULL,           &mp_vd_lavc_vaapi},
+    {HWDEC_VAAPI,       "mpeg4",        NULL,           &mp_vd_lavc_vaapi},
+#endif
 
     {0}
 };

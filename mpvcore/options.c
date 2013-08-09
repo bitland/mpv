@@ -468,7 +468,8 @@ const m_option_t mp_opts[] = {
                ({"no", 0},
                 {"vdpau", 1},
                 {"vda", 2},
-                {"crystalhd", 3})),
+                {"crystalhd", 3},
+                {"vaapi", 4})),
     OPT_STRING("hwdec-codecs", hwdec_codecs, 0),
 
     // postprocessing:
